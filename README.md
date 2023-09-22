@@ -1,2 +1,5 @@
-# jornada-milhas-api
-API de um site de viagem.
+# jornada-milhas
+API que disponibiliza possíveis destinos de viagem.
+
+## 👨‍💻🚧 Em Desenvolvimento 🚧 
+
