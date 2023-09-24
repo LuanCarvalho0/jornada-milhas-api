@@ -8,19 +8,17 @@ class DepoimentosViewSet(viewsets.ModelViewSet):
     """Exibindo todos os depoimentos"""
     queryset = Depoimento.objects.all()
     serializer_class = DepoimentoSerializer
+    
+    def update(self, request, *args, **kwargs):
+        db_depoimento = self.get_object()
+        if not db_depoimento == None:
+            db_depoimento.remove_foto()
 
-    def update(self, request, pk):
-        try:
-            db_depoimento = self.get_object()
-            data = request.data
-        except:
-            return Response({"msg": "depoimento não encontrado"}, status=status.HTTP_404_NOT_FOUND)
+        return super().update(request, *args, **kwargs)
+
+    def destroy(self, request, *args, **kwargs):
+        db_depoimento = self.get_object()
+        if not db_depoimento == None:
+            db_depoimento.remove_foto()
         
-        db_depoimento.remove_foto()
-        db_depoimento.foto = data["foto"]
-        db_depoimento.depoimento = data["depoimento"]
-        db_depoimento.nome = data["nome"]
-        db_depoimento.save()
-        serializer = DepoimentoSerializer(db_depoimento)
-
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return super().destroy(request, *args, **kwargs)
