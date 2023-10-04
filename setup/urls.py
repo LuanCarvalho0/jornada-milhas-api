@@ -3,12 +3,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from jornada_milhas.views import DepoimentosViewSet
+from jornada_milhas.views import DepoimentosViewSet, DepoimentosHomeViewSet
 from rest_framework import routers
 
 
 router = routers.DefaultRouter()
 router.register('depoimentos', DepoimentosViewSet, basename='Depoimentos')
+router.register('depoimentos-home', DepoimentosHomeViewSet, basename='Depoimentos-home')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
