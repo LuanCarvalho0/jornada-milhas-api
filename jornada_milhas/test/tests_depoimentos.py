@@ -27,7 +27,7 @@ class DepoimentosTestCase(APITestCase):
             nome = 'Nome do Autor 2'
         )
 
-    def valid_image(self):
+    def valid_image(self) -> None:
         image_file = BytesIO()
         image = Image.open(os.path.join(MEDIA_TEST, 'test-image.jpg')) 
         image.save(image_file, format="PNG")
@@ -35,17 +35,17 @@ class DepoimentosTestCase(APITestCase):
         image_file.seek(0)
         return image_file
     
-    def delete_image_test(self):
+    def delete_image_test(self) -> None:
         image_path = os.path.join(settings.MEDIA_ROOT, 'test-image.png')
         if os.path.exists(image_path):
             os.remove(image_path)
     
-    def test_requisicao_get_para_listar_todos_os_depoimentos(self):
+    def test_requisicao_get_para_listar_todos_os_depoimentos(self) -> None:
         """Teste para verificar a requisição GET para listar os depoimentos"""
         response = self.client.get(self.list_url)
         self.assertEquals(response.status_code, status.HTTP_200_OK)
 
-    def test_requisicao_post_para_criar_um_depoimento(self):
+    def test_requisicao_post_para_criar_um_depoimento(self) -> None:
         """Teste para verificar a requisição POST para criar um depoimento"""
         foto = self.valid_image()
         data = {
@@ -58,4 +58,21 @@ class DepoimentosTestCase(APITestCase):
         self.assertEquals(response.status_code, status.HTTP_201_CREATED)
 
         self.delete_image_test()
-        
+
+    def test_requisicao_delete_para_deletar_depoimento(self) -> None:
+        """Teste para verificar a requisição delete para DELETE um depoimento"""
+        response = self.client.delete('/depoimentos/1/')
+        self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_requisicao_put_para_atualizar_depoimento(self) -> None:
+        """Teste para verificar requisição PUT para atualizar um depoimento"""
+        foto = self.valid_image()
+        data = {
+            'foto': foto,
+            'depoimento': 'Este é um depoimento de teste atualizado',
+            'nome': 'Nome do Autor atualizado'
+        }
+        response = self.client.put('/depoimentos/1/', data=data)
+        self.assertEquals(response.status_code, status.HTTP_200_OK)
+
+        self.delete_image_test()
