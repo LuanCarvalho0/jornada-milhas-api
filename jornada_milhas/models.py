@@ -13,7 +13,7 @@ class Depoimento(models.Model):
 class Destino(models.Model):
     foto = models.ImageField()
     nome = models.CharField(max_length=50)
-    preco = models.DecimalField()
+    preco = models.DecimalField(max_digits=7, decimal_places=2)
 
     def __str__(self):
         return self.nome
