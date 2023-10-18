@@ -36,7 +36,7 @@ class DepoimentosTestCase(APITestCase):
         return image_file
     
     def delete_image_test(self) -> None:
-        image_path = os.path.join(settings.MEDIA_ROOT, 'test-image.png')
+        image_path = os.path.join(settings.MEDIA_ROOT, 'depoimentos/test-image.png')
         if os.path.exists(image_path):
             os.remove(image_path)
     

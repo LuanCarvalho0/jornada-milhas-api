@@ -8,8 +8,10 @@ class JornadaMilhasConfig(AppConfig):
     def ready(self) -> None:
         from django.db.models.signals import pre_delete, pre_save
 
-        from .models import Depoimento
+        from .models import Depoimento, Destino
         from .signals import delete_image
 
         pre_delete.connect(delete_image, sender=Depoimento)
+        pre_delete.connect(delete_image, sender=Destino)
         pre_save.connect(delete_image, sender=Depoimento)
+        pre_save.connect(delete_image, sender=Destino)
