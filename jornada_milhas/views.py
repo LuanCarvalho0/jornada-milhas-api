@@ -18,7 +18,14 @@ class DepoimentosHomeViewSet(viewsets.ModelViewSet):
 
 
 class DestinosViewSet(viewsets.ModelViewSet):
-    """Exibindo todos os destinos"""
-    queryset = Destino.objects.all()
+    """Exibindo todos os destinos"""  
     serializer_class = DestinoSerializer
     http_method_names = ['get','post', 'put', 'delete']
+
+    def get_queryset(self):
+        
+        queryset = Destino.objects.all()
+        nome = self.request.query_params.get('nome')
+        if nome is not None:
+            queryset = queryset.filter(nome=nome)
+        return queryset
