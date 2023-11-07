@@ -6,7 +6,7 @@ class DepoimentoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Depoimento
-        fields = ('foto', 'depoimento', 'nome')
+        fields = ('id', 'foto', 'depoimento', 'nome')
 
 
 class DestinoSerializer(serializers.ModelSerializer):
