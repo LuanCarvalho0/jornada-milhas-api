@@ -14,9 +14,12 @@ class Migration(migrations.Migration):
             name='Destino',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('foto', models.ImageField(upload_to='')),
+                ('foto_1', models.ImageField(upload_to='')),
+                ('foto_2', models.ImageField(upload_to='')),
                 ('nome', models.CharField(max_length=50)),
+                ('meta', models.CharField(max_length=160)),
                 ('preco', models.DecimalField(decimal_places=2, max_digits=7)),
+                ('texto_descritivo', models.TextField(max_length=210, blank=True)),
             ],
         ),
     ]
