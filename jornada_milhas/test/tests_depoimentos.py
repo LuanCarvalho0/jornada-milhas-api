@@ -28,7 +28,7 @@ class DepoimentosTestCase(APITestCase):
 
     def test_requisicao_post_para_criar_um_depoimento(self) -> None:
         """Teste para verificar a requisição POST para criar um depoimento"""
-        foto = valid_image()
+        foto = valid_image('test-image.png')
         data = {
             'foto': foto,
             'depoimento': 'Este é um depoimento de teste 3',
@@ -38,7 +38,7 @@ class DepoimentosTestCase(APITestCase):
         response = self.client.post(self.list_url, data=data)
         self.assertEquals(response.status_code, status.HTTP_201_CREATED)
 
-        delete_image_test('depoimentos/')
+        delete_image_test(f'depoimentos/{foto.name}')
 
     def test_requisicao_delete_para_deletar_depoimento(self) -> None:
         """Teste para verificar a requisição DELETE para deletar um depoimento"""
@@ -47,7 +47,7 @@ class DepoimentosTestCase(APITestCase):
 
     def test_requisicao_put_para_atualizar_depoimento(self) -> None:
         """Teste para verificar requisição PUT para atualizar um depoimento"""
-        foto = valid_image()
+        foto = valid_image('test-image.png')
         data = {
             'foto': foto,
             'depoimento': 'Este é um depoimento de teste atualizado',
@@ -56,4 +56,4 @@ class DepoimentosTestCase(APITestCase):
         response = self.client.put('/depoimentos/1/', data=data)
         self.assertEquals(response.status_code, status.HTTP_200_OK)
 
-        delete_image_test('depoimentos/')
+        delete_image_test(f'depoimentos/{foto.name}')
