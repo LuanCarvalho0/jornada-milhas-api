@@ -2,7 +2,7 @@ from rest_framework.test import APITestCase
 from jornada_milhas.models import Depoimento
 from django.urls import reverse
 from rest_framework import status
-from .utils import valid_image, delete_image_test
+from jornada_milhas.test.utils import valid_image, delete_image_test
 
 
 class DepoimentosTestCase(APITestCase):
