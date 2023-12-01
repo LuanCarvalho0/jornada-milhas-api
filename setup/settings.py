@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'jornada_milhas',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
