@@ -24,11 +24,11 @@ schema_view = get_schema_view(
 
 router = routers.DefaultRouter()
 router.register('depoimentos', DepoimentosViewSet, basename='Depoimentos')
-router.register('depoimentos-home', DepoimentosHomeViewSet, basename='Depoimentos-home')
 router.register('destinos', DestinosViewSet, basename='Destinos')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('depoimentos-home/', DepoimentosHomeViewSet.as_view()),
+    path('', include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

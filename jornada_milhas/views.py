@@ -1,4 +1,4 @@
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, generics
 from jornada_milhas.serializer import DepoimentoSerializer, DestinoSerializer
 from jornada_milhas.models import Depoimento, Destino
 from rest_framework.response import Response
@@ -12,12 +12,13 @@ class DepoimentosViewSet(viewsets.ModelViewSet):
     http_method_names = ['get','post', 'put', 'delete']
 
 
-class DepoimentosHomeViewSet(viewsets.ModelViewSet):
+class DepoimentosHomeViewSet(generics.ListAPIView):
     """Exibir 3 depoimentos Aleatório"""
-    queryset = Depoimento.objects.order_by('?')[:3]
+    def get_queryset(self):
+        queryset = Depoimento.objects.order_by('?')[:3]
+        return queryset
     serializer_class = DepoimentoSerializer
-    http_method_names = ['get']
-
+   
 
 class DestinosViewSet(viewsets.ModelViewSet):
     """Exibindo todos os destinos"""  
