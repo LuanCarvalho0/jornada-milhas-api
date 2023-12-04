@@ -3,6 +3,8 @@ from jornada_milhas.serializer import DepoimentoSerializer, DestinoSerializer
 from jornada_milhas.models import Depoimento, Destino
 from rest_framework.response import Response
 from django.db.models import Q
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
 class DepoimentosViewSet(viewsets.ModelViewSet):
@@ -24,6 +26,8 @@ class DestinosViewSet(viewsets.ModelViewSet):
     """Exibindo todos os destinos"""  
     serializer_class = DestinoSerializer
     http_method_names = ['get','post', 'put', 'delete']
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         queryset = Destino.objects.all()
