@@ -66,6 +66,11 @@ Instale as Dependências:
 pip install -r requirements.txt
 ```
 
+Executar as Migrações do Banco de Dados:
+```
+python manage.py migrate
+```
+
 ## 🐞 Como rodar os testes
 Para executar os testes, utilize este comando:
 
