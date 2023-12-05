@@ -10,7 +10,7 @@
 
 ## Sobre
 
-> A Jornada Milhas API é uma API REST desenvolvida para uma plataforma que oferece destinos de viagem aos seus clientes. <br>
+> A Jornada Milhas API é uma API REST desenvolvida para uma plataforma que disponibiliza destinos de viagem para seus clientes. <br>
 > A aplicação possui endpoints para acessar informações sobre os destinos e depoimentos de outros viajantes, com integração ao chat GPT para gerar automaticamente textos descritivos para os destinos, além de métodos de login para autenticação nos endpoints relacionados aos destinos.
 
 
@@ -93,4 +93,4 @@ http://127.0.0.1:8000/docs/
 
 ## 📝 Licença
 
-Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
+Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE) para mais detalhes.
