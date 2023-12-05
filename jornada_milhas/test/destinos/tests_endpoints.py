@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from rest_framework.test import APITestCase
 from jornada_milhas.models import Destino
 from django.urls import reverse
@@ -9,6 +10,7 @@ class DestinosTestCase(APITestCase):
 
     def setUp(self) -> None:
         self.list_url = reverse('Destinos-list')
+        self.user = User.objects.create_user(username='teste', password='123456')
 
         self.destino_1 = Destino.objects.create(
             foto_1 = 'image1.jpg',
@@ -29,11 +31,13 @@ class DestinosTestCase(APITestCase):
     
     def test_requisicao_get_para_listar_todos_os_destinos(self) -> None:
         """Teste para verificar a requisição GET para listar os destinos"""
+        self.client.force_authenticate(self.user)
         response = self.client.get(self.list_url)
         self.assertEquals(response.status_code, status.HTTP_200_OK)
 
     def test_requisicao_post_para_criar_um_destino(self) -> None:
         """Teste para verificar a requisição POST para criar um destino"""
+        self.client.force_authenticate(self.user)
         foto_1 = valid_image('test-image1.png')
         foto_2 = valid_image('test-image2.png')
         data = {
@@ -52,11 +56,13 @@ class DestinosTestCase(APITestCase):
 
     def test_requisicao_delete_para_deletar_destino(self) -> None:
         """Teste para verificar a requisição DELETE para deletar um destino"""
+        self.client.force_authenticate(self.user)
         response = self.client.delete('/destinos/1/')
         self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_requisicao_put_para_atualizar_destino(self) -> None:
         """Teste para verificar requisição PUT para atualizar um destino"""
+        self.client.force_authenticate(self.user)
         foto_1 = valid_image('test-image1.png')
         foto_2 = valid_image('test-image2.png')
         data = {
